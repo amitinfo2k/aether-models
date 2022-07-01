@@ -1,0 +1,71 @@
+// SPDX-FileCopyrightText: 2021 Open Networking Foundation
+//
+// SPDX-License-Identifier: Apache-2.0
+
+module onf-edgeapp {
+  namespace "http://opennetworking.org/aether/edgeapp";
+  prefix imsi-val;
+
+  import onf-aether-types { prefix at; }
+  import onf-connectivity-service { prefix cs; }
+
+
+  organization "Open Networking Foundation.";
+  contact "Amit Wankhede";
+  description
+    "An Aether edgeapp is an entity";
+
+  revision "2022-01-19" {
+    description "subscriber information Support";
+    reference "RFC 6020";
+  }
+
+  typedef edgeapp-id {
+     type at:aether-identifier;
+     description "The typedef for edgeapp-id";
+  }
+
+  container edgeapps {
+    description "The top level imsi container";
+
+    list edgeapp {
+      key "edgeapp-id";
+      unique "iccid";
+      description
+        "List of edgeapp";
+
+      leaf edgeapp-id {
+        type edgeapp-id;
+        description "ID for this imsi.";
+      }
+
+      uses at:desc-display-name;
+
+      leaf iccid {
+        type at:iccid;
+        description
+           "ICCID for this imsi value";
+      }
+
+      list connectivity-service {
+        key "connectivity-service";
+        leaf connectivity-service {
+          type leafref {
+            path "/cs:connectivity-services/cs:connectivity-service/cs:connectivity-service-id";
+          }
+          description
+            "Link to connectivity services where configuration should be pushed for this enterprise's devices";
+        }
+        leaf enabled {
+          type boolean;
+          default true;
+          description
+            "Allow or disallow pushes to this connectivity service";
+        }
+        description "The list for connectivity-service";
+      }
+
+    }
+  }
+}
+
