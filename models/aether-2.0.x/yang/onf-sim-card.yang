@@ -49,6 +49,12 @@ submodule onf-sim-card {
           description
               "IMSI for this sim card";
       }
+
+      leaf ip-address {
+          type at:ipv4-subnet;
+          description
+              "IPv4 address for this sim";
+      }
     }
   }
 }
