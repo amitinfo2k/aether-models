@@ -5,7 +5,6 @@ go 1.16
 require (
 	github.com/SeanCondon/xpath v0.0.0-20220225125014-419de017925c
 	github.com/ghodss/yaml v1.0.0
-	github.com/onosproject/aether-models/models/aether-2.0.x/v2 v2.0.10
 	github.com/onosproject/config-models v0.10.16
 	github.com/onosproject/onos-api/go v0.9.14
 	github.com/onosproject/onos-lib-go v0.8.13
