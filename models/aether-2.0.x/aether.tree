@@ -87,6 +87,7 @@ module: onf-enterprise
            |  +--rw description?    description
            |  +--rw iccid?          at:iccid
            |  +--rw imsi?           at:imsi
+           |  +--rw ip-address?     at:ipv4-subnet
            +--rw upf* [upf-id]
            |  +--rw upf-id             upf-id
            |  +--rw display-name?      string
