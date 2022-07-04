@@ -7,6 +7,8 @@ submodule onf-sim-card {
   belongs-to onf-site { prefix site; }
 
   import onf-aether-types { prefix at; }
+  import ietf-inet-types { prefix inet; }  
+
 
   organization "Open Networking Foundation.";
     contact "ROC Engineering";
@@ -50,6 +52,13 @@ submodule onf-sim-card {
           description
               "IMSI for this sim card";
       }
+      
+      leaf ip-address {
+          type inet:ipv4-address-no-zone;
+          description
+              "IPv4 address for this sim";
+      }
+
     }
   }
 }
