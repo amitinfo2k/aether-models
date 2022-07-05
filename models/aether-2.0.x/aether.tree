@@ -53,104 +53,109 @@ module: onf-enterprise
         |  |  +--rw downlink-burst-size?   at:burst
         |  +--rw default-behavior    at:behavior
         +--rw site* [site-id]
-           +--rw site-id            site-id
-           +--rw display-name?      string
-           +--rw description?       description
-           +--rw small-cell* [small-cell-id]
-           |  +--rw small-cell-id    at:aether-identifier
-           |  +--rw display-name?    string
-           |  +--rw description?     description
-           |  +--rw address?         inet:host
-           |  +--rw tac              at:tac
-           |  +--rw enable?          boolean
-           +--rw monitoring
-           |  +--rw edge-cluster-prometheus-url?      inet:uri
-           |  +--rw edge-monitoring-prometheus-url?   inet:uri
-           |  +--rw edge-device* [edge-device-id]
-           |     +--rw edge-device-id    at:aether-identifier
-           |     +--rw display-name?     string
-           |     +--rw description?      description
-           +--rw imsi-definition
-           |  +--rw mcc           at:mcc
-           |  +--rw mnc           at:mnc
-           |  +--rw enterprise    at:ent
-           |  +--rw format        string
-           +--rw device* [device-id]
-           |  +--rw device-id       device-id
-           |  +--rw display-name?   string
-           |  +--rw description?    description
-           |  +--rw imei?           at:imei
-           |  +--rw sim-card?       -> ../../sim-card/sim-id
-           +--rw sim-card* [sim-id]
-           |  +--rw sim-id          sim-card-id
-           |  +--rw display-name?   string
-           |  +--rw description?    description
-           |  +--rw iccid?          at:iccid
-           |  +--rw imsi?           at:imsi
-           |  +--rw ip-address?     at:ipv4-subnet
-           +--rw upf* [upf-id]
-           |  +--rw upf-id             upf-id
-           |  +--rw display-name?      string
-           |  +--rw description?       description
-           |  +--rw address            inet:host
-           |  +--rw port               inet:port-number
-           |  +--rw config-endpoint?   inet:uri
-           +--rw slice* [slice-id]
-           |  +--rw slice-id                 slice-id
-           |  +--rw display-name?            string
-           |  +--rw description?             description
-           |  +--rw device-group* [device-group]
-           |  |  +--rw device-group    -> ../../../device-group/device-group-id
-           |  |  +--rw enable?         boolean
-           |  +--rw default-behavior         at:behavior
-           |  +--rw filter* [application]
-           |  |  +--rw application    -> ../../../../application/application-id
-           |  |  +--rw priority?      at:priority
-           |  |  +--rw allow?         boolean
-           |  +--rw upf?                     -> ../../upf/upf-id
-           |  +--rw sst                      at:sst
-           |  +--rw sd                       at:sd
-           |  +--rw mbr
-           |  |  +--rw uplink?                at:bitrate
-           |  |  +--rw downlink?              at:bitrate
-           |  |  +--rw uplink-burst-size?     at:burst
-           |  |  +--rw downlink-burst-size?   at:burst
-           |  +--rw priority-traffic-rule* [priority-traffic-rule-id]
-           |     +--rw priority-traffic-rule-id    priority-traffic-rule-id
-           |     +--rw display-name?               string
-           |     +--rw description?                description
-           |     +--rw device                      -> ../../../device/device-id
-           |     +--rw application                 -> ../../../../application/application-id
-           |     +--rw endpoint                    -> ../../../../application/endpoint/endpoint-id
-           |     +--rw (bitrate)?
-           |     |  +--:(mbr-case)
-           |     |  |  +--rw mbr
-           |     |  |     +--rw uplink?     at:bitrate
-           |     |  |     +--rw downlink?   at:bitrate
-           |     |  +--:(gbr-case)
-           |     |     +--rw gbr
-           |     |        +--rw uplink?     at:bitrate
-           |     |        +--rw downlink?   at:bitrate
-           |     +--rw traffic-class?              -> ../../../../traffic-class/traffic-class-id
-           +--rw device-group* [device-group-id]
-           |  +--rw device-group-id    device-group-id
-           |  +--rw display-name?      string
-           |  +--rw description?       description
-           |  +--rw device* [device-id]
-           |  |  +--rw device-id    -> ../../../device/device-id
-           |  |  +--rw enable?      boolean
-           |  +--rw ip-domain?         -> ../../ip-domain/ip-domain-id
-           |  +--rw mbr
-           |  |  +--rw uplink      at:bitrate
-           |  |  +--rw downlink    at:bitrate
-           |  +--rw traffic-class      -> ../../../traffic-class/traffic-class-id
-           +--rw ip-domain* [ip-domain-id]
-              +--rw ip-domain-id     ip-domain-id
-              +--rw display-name?    string
-              +--rw description?     description
-              +--rw dnn              at:dnn
-              +--rw dns-primary?     inet:ip-address
-              +--rw dns-secondary?   inet:ip-address
-              +--rw subnet           inet:ipv4-prefix
-              +--rw admin-status?    at:admin-status
-              +--rw mtu?             at:mtu
+        |  +--rw site-id            site-id
+        |  +--rw display-name?      string
+        |  +--rw description?       description
+        |  +--rw small-cell* [small-cell-id]
+        |  |  +--rw small-cell-id    at:aether-identifier
+        |  |  +--rw display-name?    string
+        |  |  +--rw description?     description
+        |  |  +--rw address?         inet:host
+        |  |  +--rw tac              at:tac
+        |  |  +--rw enable?          boolean
+        |  +--rw monitoring
+        |  |  +--rw edge-cluster-prometheus-url?      inet:uri
+        |  |  +--rw edge-monitoring-prometheus-url?   inet:uri
+        |  |  +--rw edge-device* [edge-device-id]
+        |  |     +--rw edge-device-id    at:aether-identifier
+        |  |     +--rw display-name?     string
+        |  |     +--rw description?      description
+        |  +--rw imsi-definition
+        |  |  +--rw mcc           at:mcc
+        |  |  +--rw mnc           at:mnc
+        |  |  +--rw enterprise    at:ent
+        |  |  +--rw format        string
+        |  +--rw device* [device-id]
+        |  |  +--rw device-id       device-id
+        |  |  +--rw display-name?   string
+        |  |  +--rw description?    description
+        |  |  +--rw imei?           at:imei
+        |  |  +--rw sim-card?       -> ../../sim-card/sim-id
+        |  +--rw sim-card* [sim-id]
+        |  |  +--rw sim-id          sim-card-id
+        |  |  +--rw display-name?   string
+        |  |  +--rw description?    description
+        |  |  +--rw iccid?          at:iccid
+        |  |  +--rw imsi?           at:imsi
+        |  |  +--rw ip-address?     at:ipv4-subnet
+        |  +--rw upf* [upf-id]
+        |  |  +--rw upf-id             upf-id
+        |  |  +--rw display-name?      string
+        |  |  +--rw description?       description
+        |  |  +--rw address            inet:host
+        |  |  +--rw port               inet:port-number
+        |  |  +--rw config-endpoint?   inet:uri
+        |  +--rw slice* [slice-id]
+        |  |  +--rw slice-id                 slice-id
+        |  |  +--rw display-name?            string
+        |  |  +--rw description?             description
+        |  |  +--rw device-group* [device-group]
+        |  |  |  +--rw device-group    -> ../../../device-group/device-group-id
+        |  |  |  +--rw enable?         boolean
+        |  |  +--rw default-behavior         at:behavior
+        |  |  +--rw filter* [application]
+        |  |  |  +--rw application    -> ../../../../application/application-id
+        |  |  |  +--rw priority?      at:priority
+        |  |  |  +--rw allow?         boolean
+        |  |  +--rw upf?                     -> ../../upf/upf-id
+        |  |  +--rw sst                      at:sst
+        |  |  +--rw sd                       at:sd
+        |  |  +--rw mbr
+        |  |  |  +--rw uplink?                at:bitrate
+        |  |  |  +--rw downlink?              at:bitrate
+        |  |  |  +--rw uplink-burst-size?     at:burst
+        |  |  |  +--rw downlink-burst-size?   at:burst
+        |  |  +--rw priority-traffic-rule* [priority-traffic-rule-id]
+        |  |     +--rw priority-traffic-rule-id    priority-traffic-rule-id
+        |  |     +--rw display-name?               string
+        |  |     +--rw description?                description
+        |  |     +--rw device                      -> ../../../device/device-id
+        |  |     +--rw application                 -> ../../../../application/application-id
+        |  |     +--rw endpoint                    -> ../../../../application/endpoint/endpoint-id
+        |  |     +--rw (bitrate)?
+        |  |     |  +--:(mbr-case)
+        |  |     |  |  +--rw mbr
+        |  |     |  |     +--rw uplink?     at:bitrate
+        |  |     |  |     +--rw downlink?   at:bitrate
+        |  |     |  +--:(gbr-case)
+        |  |     |     +--rw gbr
+        |  |     |        +--rw uplink?     at:bitrate
+        |  |     |        +--rw downlink?   at:bitrate
+        |  |     +--rw traffic-class?              -> ../../../../traffic-class/traffic-class-id
+        |  +--rw device-group* [device-group-id]
+        |  |  +--rw device-group-id    device-group-id
+        |  |  +--rw display-name?      string
+        |  |  +--rw description?       description
+        |  |  +--rw device* [device-id]
+        |  |  |  +--rw device-id    -> ../../../device/device-id
+        |  |  |  +--rw enable?      boolean
+        |  |  +--rw ip-domain?         -> ../../ip-domain/ip-domain-id
+        |  |  +--rw mbr
+        |  |  |  +--rw uplink      at:bitrate
+        |  |  |  +--rw downlink    at:bitrate
+        |  |  +--rw traffic-class      -> ../../../traffic-class/traffic-class-id
+        |  +--rw ip-domain* [ip-domain-id]
+        |     +--rw ip-domain-id     ip-domain-id
+        |     +--rw display-name?    string
+        |     +--rw description?     description
+        |     +--rw dnn              at:dnn
+        |     +--rw dns-primary?     inet:ip-address
+        |     +--rw dns-secondary?   inet:ip-address
+        |     +--rw subnet           inet:ipv4-prefix
+        |     +--rw admin-status?    at:admin-status
+        |     +--rw mtu?             at:mtu
+        +--rw subscriber-data* [subscriber-id]
+           +--rw subscriber-id    subscriber-data-id
+           +--rw display-name?    string
+           +--rw description?     description
+           +--rw iccid?           at:iccid

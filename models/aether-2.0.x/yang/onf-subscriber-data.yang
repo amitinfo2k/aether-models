@@ -1,0 +1,51 @@
+// SPDX-FileCopyrightText: 2021 Open Networking Foundation
+//
+// SPDX-License-Identifier: Apache-2.0
+
+submodule onf-subscriber-data {
+  belongs-to onf-enterprise { prefix ent; }
+  
+  import ietf-inet-types { prefix inet; }
+  import onf-aether-types { prefix at; }
+
+  organization "Open Networking Foundation.";
+    contact "Scott Baker";
+    description
+      "A Aether Device...";
+
+  revision "2022-01-19" {
+    description "An Aether Device";
+    reference "RFC 6087";
+  }
+
+  typedef subscriber-data-id {
+    type at:aether-identifier;
+    description "The typedef for subscriber-id";
+  }
+
+  grouping subscriber-data {
+    description "The top level container";
+
+    list subscriber-data {
+      key "subscriber-id";
+      unique "iccid";
+      description
+        "List of subscriber info";
+
+      leaf subscriber-id {
+        type subscriber-data-id;
+        description "ID for this subscriber data imsi.";
+      }
+
+      uses at:desc-display-name;
+
+      leaf iccid {
+        type at:iccid;
+        description
+           "ICCID for this subscriber data";
+      }
+
+	
+     }
+  }
+}

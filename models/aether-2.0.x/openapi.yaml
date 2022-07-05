@@ -138,6 +138,11 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Enterprises_Enterprise_Site_Upf'
+    RequestBody_Enterprises_Enterprise_Subscriber-data:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Enterprises_Enterprise_Subscriber-data'
     RequestBody_Enterprises_Enterprise_Template:
       content:
         application/json:
@@ -279,6 +284,8 @@ components:
           x-go-type: ListKey
         site:
           $ref: '#/components/schemas/Enterprises_Enterprise_Site_List'
+        subscriber-data:
+          $ref: '#/components/schemas/Enterprises_Enterprise_Subscriber-data_List'
         template:
           $ref: '#/components/schemas/Enterprises_Enterprise_Template_List'
         traffic-class:
@@ -1280,6 +1287,51 @@ components:
       uniqueItems: true
       x-keys:
       - upf-id
+      x-list-multiple: true
+    Enterprises_Enterprise_Subscriber-data:
+      description: List of subscriber info (single)
+      properties:
+        description:
+          description: long description field
+          maxLength: 1024
+          minLength: 1
+          title: description
+          type: string
+        display-name:
+          description: display name to use in GUI or CLI
+          maxLength: 80
+          minLength: 1
+          title: display-name
+          type: string
+        iccid:
+          description: ICCID for this subscriber data
+          maxLength: 22
+          minLength: 19
+          pattern: '[0-9]{18,21}[0-9A-F]'
+          title: iccid
+          type: string
+        subscriber-id:
+          description: ID for this subscriber data imsi.
+          maxLength: 63
+          minLength: 1
+          pattern: '[a-z]([a-z0-9-]?[a-z0-9])*'
+          title: subscriber-id
+          type: string
+          x-go-type: ListKey
+      required:
+      - subscriber-id
+      title: Enterprises_Enterprise_Subscriber-data
+      type: object
+      x-list-multiple: true
+      x-must: []
+    Enterprises_Enterprise_Subscriber-data_List:
+      description: List of subscriber info (list)
+      items:
+        $ref: '#/components/schemas/Enterprises_Enterprise_Subscriber-data'
+      type: array
+      uniqueItems: true
+      x-keys:
+      - subscriber-id
       x-list-multiple: true
     Enterprises_Enterprise_Template:
       additionalProperties:
@@ -3341,6 +3393,78 @@ paths:
         "201":
           description: created
       summary: POST /enterprises/enterprise/{enterprise-id}/site/{site-id}/upf
+  /aether/v2.0.x/{target}/enterprises/enterprise/{enterprise-id}/subscriber-data:
+    description: List of subscriber info
+    get:
+      operationId: getEnterprises_Enterprise_Subscriber-data_List
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Enterprises_Enterprise_Subscriber-data_List'
+          description: GET OK 200
+      summary: GET /enterprises/enterprise/{enterprise-id}/subscriber-data List
+      tags:
+      - Enterprises_Enterprise_Subscriber-data
+      - List
+    parameters:
+    - $ref: '#/components/parameters/target'
+    - content:
+        text/plain; charset=utf-8:
+          schema:
+            type: string
+      description: key {enterprise-id}
+      in: path
+      name: enterprise-id
+      required: true
+  /aether/v2.0.x/{target}/enterprises/enterprise/{enterprise-id}/subscriber-data/{subscriber-id}:
+    delete:
+      operationId: deleteEnterprises_Enterprise_Subscriber-data
+      responses:
+        "200":
+          description: DELETE 200 OK
+      summary: DELETE /enterprises/enterprise/{enterprise-id}/subscriber-data
+    description: List of subscriber info
+    get:
+      operationId: getEnterprises_Enterprise_Subscriber-data
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Enterprises_Enterprise_Subscriber-data'
+          description: GET OK 200
+      summary: GET /enterprises/enterprise/{enterprise-id}/subscriber-data Container
+      tags:
+      - Enterprises_Enterprise_Subscriber-data
+      - Container
+    parameters:
+    - $ref: '#/components/parameters/target'
+    - content:
+        text/plain; charset=utf-8:
+          schema:
+            type: string
+      description: key {enterprise-id}
+      in: path
+      name: enterprise-id
+      required: true
+    - content:
+        text/plain; charset=utf-8:
+          schema:
+            type: string
+      description: key {subscriber-id}
+      in: path
+      name: subscriber-id
+      required: true
+    post:
+      operationId: postEnterprises_Enterprise_Subscriber-data
+      requestBody:
+        $ref: '#/components/requestBodies/RequestBody_Enterprises_Enterprise_Subscriber-data'
+      responses:
+        "201":
+          description: created
+      summary: POST /enterprises/enterprise/{enterprise-id}/subscriber-data
   /aether/v2.0.x/{target}/enterprises/enterprise/{enterprise-id}/template:
     description: List of slice templates
     get:

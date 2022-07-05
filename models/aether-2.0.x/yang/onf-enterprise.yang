@@ -20,6 +20,7 @@ module onf-enterprise {
   include onf-template;
   include onf-device;
   include onf-priority-traffic-rule;
+  include onf-subscriber-data;
 
   organization "Open Networking Foundation.";
   contact "Scott Baker";
@@ -87,6 +88,8 @@ module onf-enterprise {
       uses template;
 
       uses site;
+
+      uses subscriber-data;
     }
   }
 }
